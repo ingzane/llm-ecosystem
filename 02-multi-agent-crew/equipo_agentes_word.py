@@ -1,6 +1,8 @@
 import os
 from dotenv import load_dotenv
 from crewai import LLM, Agent, Task, Crew
+from docx import Document
+
 
 # 1. Cargamos la API Key de Groq de forma segura desde el archivo .env
 load_dotenv()
@@ -96,13 +98,16 @@ print("\n🚀 Iniciando el pipeline autónomo Multi-Agente...")
 resultado_final = equipo_ingenieria.kickoff()
 
 # 6. Automatización: Persistencia del reporte completo en un archivo local
-nombre_reporte = "reporte_ingenieria.txt"
+nombre_reporte = "reporte_ingenieria.docx"
 
-with open(nombre_reporte, "w", encoding="utf-8") as archivo:
-    archivo.write("==================================================\n")
-    archivo.write(" REPORTE COMPLETO DEL PIPELINE MULTI-AGENTE\n")
-    archivo.write("==================================================\n\n")
-    archivo.write(str(resultado_final))
+# Creamos el objeto documento de Word real
+doc = Document()
+doc.add_heading('REPORTE COMPLETO DEL PIPELINE MULTI-AGENTE', level=1)
 
+# Agregamos el texto de la IA como un párrafo estándar
+doc.add_paragraph(str(resultado_final))
+
+# Guardamos con la extensión correcta y estructura nativa
+doc.save("reporte_ingenieria.docx")
 print(f"\n[¡Éxito!] El pipeline ha finalizado.")
 print(f"El archivo '{nombre_reporte}' fue creado de forma automática en tu carpeta local.")

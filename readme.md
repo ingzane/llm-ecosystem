@@ -1,38 +1,34 @@
-# LLM Application Engineering - Experimental Lab 🤖
+# Enterprise LLM Application Engineering - Experimental Lab 🤖
 
-Este repositorio contiene el entorno experimental (Laboratorio) diseñado para el desarrollo, prueba y despliegue de aplicaciones basadas en Modelos de Lenguaje de Gran Escala (LLMs) y arquitecturas orientadas a agentes. El enfoque principal es la integración segura de modelos de inteligencia artificial en flujos de trabajo empresariales y automatizaciones locales.
+Este repositorio es un entorno modular diseñado para la investigación, desarrollo y prueba de arquitecturas basadas en Inteligencia Artificial y Modelos de Lenguaje de Gran Escala (LLMs).
 
-## 🛠️ Stack Tecnológico
+## 🗂️ Índice de Módulos del Laboratorio
 
-* **Language:** Python 3.12+
-* **Inference Infrastructure:** Groq Cloud API
-* **Core Model:** Qwen 3.6 (27B Parameters) - *Reasoning Engine*
-* **Configuration & Security:** Python-Dotenv
+Cada carpeta contiene un laboratorio independiente con su propio código fuente y documentación técnica detallada:
 
-## 📁 Estructura del Módulo (Fase 1)
+* **[📂 Módulo 01: Inferencia Básica y Control de Parámetros](./01-basic-inference/)**
+  * Validación de conectividad con la API de Groq, selección de modelos de razonamiento lógico (`Qwen 3.6`) y técnicas iniciales de persistencia local de texto.
+* **[📂 Módulo 02: Sistemas Multi-Agente Autónomos](./02-multi-agent-crew/)**
+  * Orquestación de pipelines secuenciales utilizando **CrewAI**. Simulación de flujos de ingeniería de software con agentes especializados colaborativos (Product Owner + QA Engineer).
 
-* `pregunta_ia.py`: Pipeline principal que gestiona la conexión con la API de inferencia, aplica filtros de control de respuesta y automatiza la persistencia física local.
-* `lista_modelos.py`: Script de auditoría dinámica para consultar el inventario de modelos activos y disponibles en el servidor remoto.
-* `.env`: Archivo local y aislado para la inyección de credenciales mediante variables de entorno (excluido de control de versiones).
+## 🛠️ Stack Tecnológico Global
 
-## 🚀 Arquitectura y Buenas Prácticas Implementadas
+* **Language:** Python 3.12 (Standard Stable Version)
+* **Core Frameworks:** CrewAI & CrewAI Tools
+* **Inference Platform:** Groq Cloud API
+* **Security:** Python-Dotenv
 
-1. **Gestión Segura de Credenciales (Enterprise Ready):** Implementación de variables de entorno mediante `python-dotenv` y aislamiento de secretos usando `.gitignore` para cumplir con las políticas de *Push Protection* de GitHub.
-2. **Control de Razonamiento Nativo (Model Taming):** Configuración avanzada del *payload* mediante parámetros nativos (`reasoning_format="hidden"`) para apagar el modo de pensamiento largo del modelo de razonamiento lógico, garantizando respuestas deterministas, cortas y predecibles.
-3. **Persistencia Física Automatizada:** Flujo automatizado de captura de *outputs* que interactúa directamente con el sistema de archivos local, exportando las respuestas validadas a archivos planos `.txt`.
+## ⚙️ Inicialización General del Repositorio
 
-## 🔧 Configuración e Instalación
+Para replicar cualquiera de los laboratorios, clona este repositorio, configura tu entorno virtual en la raíz e instala las dependencias:
 
-1. Clonar el repositorio.
-2. Crear un archivo `.env` en la raíz del proyecto e inyectar tu API Key:
-   ```env
-   GROQ_API_KEY=tu_gsk_token_aqui
-   ```
-3. Instalar las dependencias requeridas:
-   ```bash
-   pip install groq python-dotenv
-   ```
-4. Ejecutar el pipeline de prueba:
-   ```bash
-   python pregunta_ia.py
-   ```
+```bash
+python -m venv venv
+# Activar entorno (PowerShell Windows):
+Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+.\venv\Scripts\Activate.ps1
+
+# Instalar dependencias globales:
+pip install -r requirements.txt
+```
+Crea tu archivo `.env` en la raíz con tu `GROQ_API_KEY=tu_token` y navega a la carpeta del módulo que desees probar.
