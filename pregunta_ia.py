@@ -1,9 +1,9 @@
 import os
 from groq import Groq
-from dotenv import load_env  # <- Cargador de variables de entorno
+from dotenv import load_dotenv  # <- Cargador de variables de entorno
 
 # Buscamos el archivo .env local y cargamos sus variables al sistema
-load_env()
+load_dotenv()
 
 # Inicializamos el cliente. Al no pasarle parámetros, Groq busca automáticamente 
 # una variable de entorno llamada exactamente 'GROQ_API_KEY'
@@ -34,3 +34,12 @@ respuesta = cliente.chat.completions.create(
 # 4. Python recibe la respuesta de la IA y la muestra en tu pantalla
 print("\n--- Respuesta de la IA ---")
 print(respuesta.choices[0].message.content)
+
+# 5. Automatización: Creamos un archivo de texto y guardamos la respuesta adentro
+nombre_archivo = "concepto_jira.txt"
+
+with open(nombre_archivo, "w", encoding="utf-8") as archivo:
+    archivo.write("=== CONCEPTO DE JIRA GENERADO POR IA ===\n\n")
+    archivo.write(respuesta.choices[0].message.content)
+
+print(f"\n[¡Éxito!] El archivo '{nombre_archivo}' ha sido creado y guardado en tu carpeta local.")
