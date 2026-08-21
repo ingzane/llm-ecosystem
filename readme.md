@@ -1,4 +1,4 @@
-# Enterprise LLM Application Engineering - Experimental Lab 🤖
+# Enterprise LLM Application Engineering - 🤖
 
 Este repositorio es un entorno modular diseñado para la investigación, desarrollo y prueba de arquitecturas basadas en Inteligencia Artificial y Modelos de Lenguaje de Gran Escala (LLMs).
 
