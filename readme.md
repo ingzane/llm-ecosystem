@@ -11,7 +11,7 @@ Cada carpeta contiene un laboratorio independiente con su propio código fuente 
 * **[📂 Módulo 02: Sistemas Multi-Agente Autónomos](./02-multi-agent-crew/)**
   * Orquestación de pipelines secuenciales utilizando **CrewAI**. Simulación de flujos de ingeniería de software con agentes especializados colaborativos (Product Owner + QA Engineer).
 * **[📂 Módulo 03: Integración Avanzada con Atlassian Jira](./03-jira-integration/)**
-  * Conexión segura vía API REST utilizando tokens de acceso personales. Implementación de automatizaciones en lote con JQL dinámico, filtros antiduplicación de comentarios (idempotencia) y resúmenes ejecutivos con Qwen 3.6 orientados a la auditoría técnica para managers.
+  * Conexión segura vía API REST utilizando tokens de acceso personales. Implementación de automatizaciones en lote con JQL dinámico, filtros de idempotencia (`[AI]`) y generación condicional de páginas Post-Mortem en Confluence Cloud mediante llamadas HTTP nativas (`requests`) al detectar lecciones aprendidas con Qwen 3.6.
 
 
 ## 🛠️ Stack Tecnológico Global
