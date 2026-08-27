@@ -25,8 +25,8 @@ jql_automatizacion = "status = 'Done' ORDER BY created DESC"
 print("🔍 1/3. Escaneando tickets cerrados en tu tablero...")
 
 try:
-    # Buscamos los últimos 10 tickets cerrados
-    tickets_cerrados = jira_client.search_issues(jql_automatizacion, maxResults=10)
+    # Buscamos los últimos 5 tickets cerrados
+    tickets_cerrados = jira_client.search_issues(jql_automatizacion, maxResults=3)
     print(f"📋 Se encontraron {len(tickets_cerrados)} tickets en estado cerrado.")
 
     # [BUCLE PRINCIPAL]: Recorremos cada ticket detectado de forma automática
