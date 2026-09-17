@@ -1,0 +1,8 @@
+.env
+venv/
+.vscode/
+__pycache__/
+**/reporte_ingenieria.txt
+**/reporte_ingenieria.docx
+**/concepto_jira.txt
+**/info_daily.txt

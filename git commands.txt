@@ -1,0 +1,22 @@
+git commands
+--------------------------------------------
+
+# 1. Deshacemos el commit fallido pero mantenemos tus archivos intactos
+git reset --soft HEAD~1
+
+# 2. Agregamos los archivos corregidos al área de preparación
+git add pregunta_ia.py lista_modelos.py
+
+# 3. Creamos un nuevo commit limpio (sin secretos adentro)
+git commit -m "feat: implement environment variables for secure API key management"
+
+# 4. Empujamos el código de forma segura a GitHub
+git push -u origin main
+
+----------
+Ejecutar entorno virtual (desde aquí ejecuto los programas python para que usen librerías desde ahi y no desde todo windows)
+
+(Set-ExecutionPolicy -ExecutionPolicy RemoteSigned -Scope Process
+.\venv\Scripts\Activate.ps1
+
+----------
