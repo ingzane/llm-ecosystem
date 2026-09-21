@@ -27,9 +27,30 @@ jql_automatizacion = "status = 'Done' ORDER BY resolved DESC"
 
 print("🔍 1/3. Escaneando tickets cerrados en tu tablero...")
 
+def agregar_label_leccion(issue):
+    """Añade la etiqueta 'leccion-publicada' al ticket de Jira."""
+    try:
+        labels_actuales = list(issue.fields.labels or [])
+
+        if "leccion-publicada" not in labels_actuales:
+            labels_actuales.append("leccion-publicada")
+
+            issue.update(
+                fields={
+                    "labels": labels_actuales
+                }
+            )
+
+            print(f"🏷️ [JIRA] Etiqueta 'leccion-publicada' añadida a {issue.key}.")
+        else:
+            print(f"⏭️ [JIRA] El ticket {issue.key} ya tiene la etiqueta 'leccion-publicada'.")
+
+    except Exception as e:
+        print(f"❌ [JIRA] Error al añadir la etiqueta a {issue.key}: {e}")
+
 try:
     # Buscamos los últimos 3 tickets cerrados
-    tickets_cerrados = jira_client.search_issues(jql_automatizacion, maxResults=3)
+    tickets_cerrados = jira_client.search_issues(jql_automatizacion, maxResults=10)
     print(f"📋 Se encontraron {len(tickets_cerrados)} tickets en estado cerrado.")
 
     # [BUCLE PRINCIPAL]: Recorremos cada ticket detectado de forma automática
@@ -107,6 +128,9 @@ try:
             partes = re.split(r'(?i)lecciones aprendidas:', resumen_final)
             resumen_puro = re.sub(r'(?i)^Resumen de cierre ejecutivo:\s*', '', partes[0]).strip() # Saco el titulo inicial si existe
             lecciones_puras = partes[1].strip() if len(partes) > 1 else ""
+
+            #print(f"📝 Resumen extraído: {resumen_puro}")
+            #print(f"💡 Lecciones extraídas: {lecciones_puras}")
             
             # Invocamos el script externo de Confluence
             crear_pagina_leccion(
@@ -115,6 +139,8 @@ try:
                 contenido_resumen=resumen_puro,
                 contenido_lecciones=lecciones_puras
             )
+
+            agregar_label_leccion(issue)
         else:
             print(f"☕ No hay lecciones aprendidas que exportar para el ticket {TICKET_ID}.")
 
