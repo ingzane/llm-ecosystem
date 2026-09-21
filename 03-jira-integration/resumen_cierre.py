@@ -50,7 +50,7 @@ def agregar_label_leccion(issue):
 
 try:
     # Buscamos los últimos 3 tickets cerrados
-    tickets_cerrados = jira_client.search_issues(jql_automatizacion, maxResults=10)
+    tickets_cerrados = jira_client.search_issues(jql_automatizacion, maxResults=1)
     print(f"📋 Se encontraron {len(tickets_cerrados)} tickets en estado cerrado.")
 
     # [BUCLE PRINCIPAL]: Recorremos cada ticket detectado de forma automática
@@ -133,14 +133,23 @@ try:
             #print(f"💡 Lecciones extraídas: {lecciones_puras}")
             
             # Invocamos el script externo de Confluence
-            crear_pagina_leccion(
+            url_confluence = crear_pagina_leccion(
                 ticket_id=TICKET_ID,
                 titulo_ticket=issue.fields.summary,
                 contenido_resumen=resumen_puro,
                 contenido_lecciones=lecciones_puras
             )
 
+            if url_confluence:
+                issue.update(
+                    fields={
+                        "customfield_10272": url_confluence
+                    }
+                )
+                print(f"🔗 [JIRA] Enlace a Confluence añadido al ticket {TICKET_ID}.")
+
             agregar_label_leccion(issue)
+
         else:
             print(f"☕ No hay lecciones aprendidas que exportar para el ticket {TICKET_ID}.")
 

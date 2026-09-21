@@ -69,22 +69,52 @@ def crear_pagina_leccion(ticket_id, titulo_ticket, contenido_resumen, contenido_
 
         # Página creada correctamente
         if respuesta.status_code in [200, 201]:
-            print(
-                f"✅ [CONFLUENCE] ¡Página creada con éxito "
-                f"en el espacio '{SPACE_KEY}'!"
-            )
-            return True
+            datos_pagina = respuesta.json()
+            url_pagina = f"{JIRA_SERVER}/wiki{datos_pagina['_links']['webui']}"
+
+            print(f"✅ [CONFLUENCE] ¡Página creada con éxito en el espacio '{SPACE_KEY}'!")
+            print(f"🔗 [CONFLUENCE] URL: {url_pagina}")
+
+            return url_pagina
 
         # Página ya existente
-        elif (
-            respuesta.status_code == 400
-            and "already exists" in respuesta.text.lower()
-        ):
-            print(
-                f"⏭️ [CONFLUENCE] La página '{titulo_pagina}' "
-                f"ya existe. Se omite la publicación."
-            )
-            return True
+        elif respuesta.status_code == 400 and "already exists" in respuesta.text.lower():
+            print(f"⏭️ [CONFLUENCE] La página '{titulo_pagina}' ya existe. Buscando su URL...")
+
+            url_busqueda = f"{JIRA_SERVER}/wiki/rest/api/content"
+
+            parametros = {
+                "title": titulo_pagina,
+                "spaceKey": SPACE_KEY,
+                "type": "page"
+            }
+
+            with requests.Session() as session:
+                busqueda = session.get(
+                    url_busqueda,
+                    params=parametros,
+                    auth=(JIRA_USER, JIRA_API_TOKEN),
+                    headers={
+                        "Accept": "application/json",
+                        "Connection": "close"
+                    },
+                    timeout=30
+                )
+
+            if busqueda.status_code == 200:
+                resultados = busqueda.json().get("results", [])
+
+                if resultados:
+                    pagina_existente = resultados[0]
+
+                    url_pagina = f"{JIRA_SERVER}/wiki{pagina_existente['_links']['webui']}"
+
+                    print(f"🔗 [CONFLUENCE] Página existente encontrada: {url_pagina}")
+
+                    return url_pagina
+
+            print(f"❌ [CONFLUENCE] No se pudo localizar la página existente.")
+            return None
 
         # Cualquier otro error de API
         else:
