@@ -5,3 +5,11 @@ __pycache__/
 **/reporte_ingenieria.txt
 **/concepto_jira.txt
 **/info_daily.txt
+
+# RAG
+04-rag-pipeline/chroma_db/
+04-rag-pipeline/documentos/*
+!04-rag-pipeline/documentos/.gitkeep
+
+# ChromaDB
+chroma_db/

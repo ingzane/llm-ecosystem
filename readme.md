@@ -12,6 +12,9 @@ Cada carpeta contiene un laboratorio independiente con su propio código fuente 
   * Orquestación de pipelines secuenciales utilizando **CrewAI**. Simulación de flujos de ingeniería de software con agentes especializados colaborativos (Product Owner + QA Engineer).
 * **[📂 Módulo 03: Integración Avanzada con Atlassian Jira](./03-jira-integration/)**
   * Conexión segura vía API REST utilizando tokens de acceso personales. Implementación de automatizaciones en lote con JQL dinámico, filtros de idempotencia (`[AI]`) y generación condicional de páginas Post-Mortem en Confluence Cloud mediante llamadas HTTP nativas (`requests`) al detectar lecciones aprendidas con Qwen 3.6.
+* **[📂 Módulo 04: Local RAG Pipeline](./04-rag-pipeline/)**
+  * Implementación de un sistema **RAG (Retrieval-Augmented Generation)** con embeddings locales mediante **Sentence Transformers**, almacenamiento vectorial en **ChromaDB** y generación de respuestas con **Qwen 3.8-27B** vía Groq. Recuperación semántica de información desde documentación interna y generación de respuestas basada exclusivamente en el contexto recuperado.
+
 
 
 ## 🛠️ Stack Tecnológico Global

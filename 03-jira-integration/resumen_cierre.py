@@ -50,7 +50,7 @@ def agregar_label_leccion(issue):
 
 try:
     # Buscamos los últimos 3 tickets cerrados
-    tickets_cerrados = jira_client.search_issues(jql_automatizacion, maxResults=1)
+    tickets_cerrados = jira_client.search_issues(jql_automatizacion, maxResults=4)
     print(f"📋 Se encontraron {len(tickets_cerrados)} tickets en estado cerrado.")
 
     # [BUCLE PRINCIPAL]: Recorremos cada ticket detectado de forma automática
