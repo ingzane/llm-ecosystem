@@ -21,7 +21,11 @@ Cada carpeta contiene un laboratorio independiente con su propio código fuente 
 
 * **Language:** Python 3.12 (Standard Stable Version)
 * **Core Frameworks:** CrewAI & CrewAI Tools
-* **Inference Platform:** Groq Cloud API
+* **LLM / Inference:** Qwen via Groq Cloud API
+* **Embeddings:** Sentence Transformers (`all-MiniLM-L6-v2`)
+* **Vector Database:** ChromaDB
+* **Integrations:** Jira & Confluence REST APIs
+* **Automation:** Jenkins
 * **Security:** Python-Dotenv
 
 ## ⚙️ Inicialización General del Repositorio
